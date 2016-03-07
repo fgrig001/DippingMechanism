@@ -13,5 +13,9 @@ inside your Arduino sketch folder.
 Schematic
 ----------
 ![schematic](/images/Schematic.png)
+
+State Machines
+--------------
+![Button SM](/images/ButtonSMDiagram.png)
   
 
