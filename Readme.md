@@ -7,7 +7,7 @@ Instructions
 Simply run 
 ```sh
 git clone https://github.com/fgrig001/DippingMechanism.git
-''' 
+``` 
 inside your Arduino sketch folder.
 
 Schematic
