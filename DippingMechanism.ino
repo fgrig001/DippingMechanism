@@ -1,3 +1,4 @@
+
 /*
   The circuit:
  * LCD RS pin to digital pin 12
@@ -11,49 +12,39 @@
  * ends to +5V and ground
  * wiper to LCD VO pin (pin 3)
  */
-
+ 
 #include <LiquidCrystal.h>
 #include "Button.h"
+#include "SMObject.h"
+#include "Menu.h"
 
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-Button minusButton(6), plusButton(7), runButton(8), killButton(9);
+SMObject* SMObjects[10];
+int numSMObjects = 5;
 
-//  Global Variables
-int speedVal;
+Button Button1(6); 
+Button Button2(7); 
+Button Button3(8); 
+Button Button4(9);
+Menu DipperMenu;
+
 
 void setup() {
-  // initialize variables
-  speedVal = 0;
-  // set up the LCD's number of columns and rows: 
-  lcd.begin(16, 2);
-  // Print a message to the LCD.
-  lcd.print("Rate: 00 mm/s");
-  lcd.setCursor(0, 1);
-  lcd.print(" -  +   run kill");
+	DipperMenu.InitButtons(&Button1,&Button2,&Button3,&Button4);
+	DipperMenu.InitLCD(12,11,5,4,3,2);
+	DipperMenu.InitMotor(0,1);
+
+	SMObjects[0] = &Button1;
+	SMObjects[1] = &Button2;
+	SMObjects[2] = &Button3;
+	SMObjects[3] = &Button4;
+	SMObjects[4] = &DipperMenu;
 }
 
 void loop() {
-  plusButton.SM();
-  minusButton.SM();
-  runButton.SM();
-  killButton.SM();
-  if(minusButton.getStatus() == 0){
-      lcd.setCursor(6,0);
-      lcd.print(--speedVal,DEC);
-  }
-  if(plusButton.getStatus() == 0){
-      lcd.setCursor(6,0);
-      lcd.print(++speedVal,DEC);
-  }
-  if(runButton.getStatus() == 0){
-      //lcd.setCursor(0, 0);
-      //lcd.print("Rate: 11 mm/s");
-  }
-  if(killButton.getStatus() == 0){
-      //lcd.setCursor(0, 0);
-      //lcd.print("Rate: 00 mm/s");
-  }
-  delay(20);
+	for(int i=0;i<numSMObjects;++i){
+		SMObjects[i]->SM();
+	}
+  	delay(20);
 }
 
 

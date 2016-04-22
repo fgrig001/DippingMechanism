@@ -1,7 +1,8 @@
 #pragma once
 #include <Arduino.h>
+#include "SMObject.h"
 
-class Button{
+class Button : public SMObject{
 	public:
 		Button(int pin);
 		bool getStatus();
@@ -19,6 +20,7 @@ Button::Button(int pin):
 {
 	pinMode(pin,INPUT);
 	digitalWrite(pin,HIGH);
+	period = 5;
 }
 
 bool Button::getStatus(){
