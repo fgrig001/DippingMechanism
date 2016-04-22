@@ -17,5 +17,7 @@ Schematic
 State Machines
 --------------
 ![Button SM](/images/ButtonSMDiagram.png)
+
+![Menu SM](/images/MenuSMDiagram.png)
   
 
